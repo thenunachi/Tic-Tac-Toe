@@ -9,21 +9,20 @@ function App() {
       </header>
       <div>
         <h1>Tic-tac-toe</h1>
-        {/* <p>dgfdgdfgdfgdfgfdgfgfdfdgfd</p>
-        <div>3*3 box</div> */}
+       
         <div className="matrix-container">
           {createMatrix(3, 3, "").map((row, rowIndex) =>
             row.map((colCell, colIndex) => (
-              
-              <div key={`${rowIndex}-${colIndex}`} 
+
+              <div key={`${rowIndex}-${colIndex}`}
                 className="cell"
               >
 
-                { colCell }
+                {colCell}
               </div>
             ))
           )}
-          
+
         </div>
 
 
@@ -33,11 +32,11 @@ function App() {
 }
 
 
-const createMatrix = (rows,cols,initialValue)=>{
+const createMatrix = (rows, cols, initialValue) => {
   let arr = new Array(rows)
-  for (let i=0;i<rows;i++){
+  for (let i = 0; i < rows; i++) {
     arr[i] = new Array(cols).fill(initialValue)
-    // console.log(new Array(cols).fill(initialValue),"cols")
+
   }
   return arr
 }
@@ -66,25 +65,71 @@ const createMatrix = (rows,cols,initialValue)=>{
 // 0   0,0   0,1   0,2
 // 1   1,0   1,1   1,2
 // 2   2,0   2,1   2,2
+const findPlayerWins = (board, player) => {
+  // "X" is human and "O" is computer
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] === "") {
+        board[i][j] = "X"
 
-const checkWin = (board,player) =>{
-for(let i= 0;i<3;i++){ //row starts at 0 and goes till 2
-if(board[i][0] === player && board[i][1] === player && board[i][2] === player){
-  return true
-}
-}
-for(let j= 0;j<3;j++){ //col starts at 0 and goes till 2
-  if(board[0][j] === player && board[1][j] === player && board[2][j] === player){
-    return true
+        if (checkWin(board, "X")) {
+          return [i, j] // returning [i,j] to highlight the cells of winning person
+        }
+        else {
+          board[i][j] = ""
+        }
+      }
+
+    }
   }
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] === "") {
+        board[i][j] = "O";
+
+        if (checkWin(board, "O")) {
+          return [i, j]
+        }
+        else {
+          board[i][j] = ""
+        }
+      }
+
+    }
+  }
+  const emptyCell = []
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+         if( board[i][j] == ""){
+            emptyCell.push([i,j])
+         }
+
+    }
+  }
+   const randomIndex = Math.floor(Math.random * emptyCell.length) // gives index between 0 to length of emptycell
+   return emptyCell[randomIndex] // is the empty cell. This is to help computer to find cells if it is not winning to find empty cell to have "O"
+}
+
+const checkWin = (board, player) => {
+  for (let i = 0; i < 3; i++) { //row starts at 0 and goes till 2
+    if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
+      return true
+    }
+  }
+  for (let j = 0; j < 3; j++) { //col starts at 0 and goes till 2
+    if (board[0][j] === player && board[1][j] === player && board[2][j] === player) {
+      return true
+    }
   }
   //  check diagnols from top left to right
-if(board[0][0] === player && board[1][1] === player && board[2][2] === player){
-  return true
-}
-//  checking diagnols from  top right to left
-if(board[0][2] === player && board[1][1] === player && board[2][0] === player){
-  return true
-}
+  if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
+    return true
+  }
+  //  checking diagnols from  top right to left
+  if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
+    return true
+  }
+  return false
 }
 export default App;
