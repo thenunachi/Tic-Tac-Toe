@@ -1,20 +1,53 @@
 // import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+
+
+
+
+
 
 function App() {
+
+  const [board, setBoard] = useState([["", "", ""],
+  ["", "", ""],
+  ["", "", ""]]);
+  const [player1,setPlayer1] = useState('X');
+  const [player2,setPlayer2] = useState('O');
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+
+
+
+  const handleCellClick = (row, col) => {
+    if (board[row][col] === "") {
+      const newBoard = [...board]
+      newBoard[row][col] = currentPlayer
+      setBoard(newBoard)
+      console.log(board,"board")
+      setCurrentPlayer(currentPlayer === "X" ? "O" : "X")
+      console.log(currentPlayer,"currentPlayer")
+      //In the case of setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X'), the condition is currentPlayer === 'X', 
+      //which checks if the current player is 'X'. If the condition is true, the operator returns 'O', which sets the next player to 'O'. 
+      //If the condition is false (i.e., the current player is 'O'), the operator returns 'X',
+      // which sets the next player to 'X'. This effectively toggles between 'X' and 'O' on each turn.
+    }
+  }
+
+
+
   return (
     <div className="App">
       <header className="App-header">
 
       </header>
-      <div>
+      {/* <div>
         <h1>Tic-tac-toe</h1>
-       
+        <h2>{currentPlayer}'s turn</h2>
         <div className="matrix-container">
           {createMatrix(3, 3, "").map((row, rowIndex) =>
             row.map((colCell, colIndex) => (
 
-              <div key={`${rowIndex}-${colIndex}`}
+              <div key={`${rowIndex}-${colIndex}`} onClick={handleCellClick(rowIndex, colIndex)}
                 className="cell"
               >
 
@@ -26,7 +59,30 @@ function App() {
         </div>
 
 
+      </div> */}
+      <div>
+      <h2>{currentPlayer}'s turn</h2>
+      <label>Player1:</label>
+      <input type="text" value={player1} onChange={(e) => setPlayer1(e.target.value)} />
+      <label>Player2:</label>
+      <input type="text" value={player2} onChange={(e) => setPlayer2(e.target.value)} />
+        <table >
+        <tbody>
+          {board.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, colIndex) => (
+                
+                <td key={`${rowIndex}-${colIndex}`} className="cell" onClick={() => handleCellClick(rowIndex, colIndex)}>
+                  {cell}
+                  
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+        </table>
       </div>
+    
     </div>
   );
 }
@@ -101,14 +157,14 @@ const findPlayerWins = (board, player) => {
   const emptyCell = []
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-         if( board[i][j] == ""){
-            emptyCell.push([i,j])
-         }
+      if (board[i][j] === "") {
+        emptyCell.push([i, j])
+      }
 
     }
   }
-   const randomIndex = Math.floor(Math.random * emptyCell.length) // gives index between 0 to length of emptycell
-   return emptyCell[randomIndex] // is the empty cell. This is to help computer to find cells if it is not winning to find empty cell to have "O"
+  const randomIndex = Math.floor(Math.random() * emptyCell.length) // gives index between 0 to length of emptycell
+  return emptyCell[randomIndex] // is the empty cell. This is to help computer to find cells if it is not winning to find empty cell to have "O"
 }
 
 const checkWin = (board, player) => {
