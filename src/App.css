@@ -13,16 +13,16 @@
   }
 }
 
-.App-header {
+/* .App-header {
   /* background-color: #282c34; */
   /* min-height: 100vh; */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
-}
+} */ */
 
 .App-link {
   color: #61dafb;
@@ -88,4 +88,22 @@ td:hover {
 
 input{
   border: none;
+}
+#video {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  /* background: url("https://designerapp.officeapps.live.com/designerapp/Media.ashx/?id=9b123884-f7b9-4cb6-89b1-453ed7f00f91.mp4&fileToken=616ad2d6-5423-470a-b11b-63c0e8e46019&dcHint=WestUS2") no-repeat center center fixed; */
+  background-size: cover;
+}
+main{
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  background-color: rgb(234,234,216);
+  border-radius: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: -882px;
 }
