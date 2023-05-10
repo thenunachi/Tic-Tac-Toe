@@ -65,11 +65,11 @@ const srcVideo = car
   return (
 
     <div id="rootDiv">
-      {/* <video  autoPlay loop muted id="video"> */}
-        {/* <source src={srcVideo} type="video/mp4" /> */}
-          {/* <source src="https://designerapp.officeapps.live.com/designerapp/Media.ashx/?id=7b7f6e03-86a5-45b1-aa4e-1064b0fe8dff.mp4&fileToken=d9845440-514b-40b7-b79d-534660ebc7f2&dcHint=WestUS2" type="video/ogg" /> */}
+      <video  autoPlay loop muted id="video"> 
+         <source src={srcVideo} type="video/mp4" /> 
+          <source src="https://designerapp.officeapps.live.com/designerapp/Media.ashx/?id=7b7f6e03-86a5-45b1-aa4e-1064b0fe8dff.mp4&fileToken=d9845440-514b-40b7-b79d-534660ebc7f2&dcHint=WestUS2" type="video/ogg" /> */}
             
-          {/* </video> */}
+           </video>
           <main>
           <h2>{currentPlayer}'s turn</h2>
           <label>Player1:</label>
